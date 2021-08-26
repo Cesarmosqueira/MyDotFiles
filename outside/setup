@@ -1,0 +1,9 @@
+
+xset s off
+xset -dpms
+xset s noblank 
+#faster terminal
+xset r rate 270 50
+
+exec ~/.screenlayout/edp1S-dp2P.layout.sh
+exec nitrogen --restore
