@@ -1,62 +1,75 @@
-# This is a sample commands.py.  You can add your own commands here.
-#
-# Please refer to commands_full.py for all the default commands and a complete
-# documentation.  Do NOT add them all here, or you may end up with defunct
-# commands when upgrading ranger.
+# ===============================================
+# Ranger Command Extensions (WIP)
+# ===============================================
+# 
+# Since deleting things with `rm` on a system 
+# with a trash is a bit of a waste, I've written 
+# two commands to make use of OSX's trash. The 
+# interface to this is based on Ali Rantakari's 
+# excellent 'trash' program.
+# 
+# The other planned extension is a rewrite of the 
+# default `:terminal` command to open a native 
+# Terminal window, instead of opening fucking X 
+# every time you want to do something in bash.
+# 
+# ===============================================
 
-# A simple command for demonstration purposes follows.
-# -----------------------------------------------------------------------------
+from ranger.api.commands import *
 
-from __future__ import (absolute_import, division, print_function)
+# class terminal(Command):
+#     """:terminal
 
-# You can import any python module as needed.
-import os
+#     Spawns an "x-terminal-emulator" starting in the current directory.
+#     """
+#     def execute(self):
+#         import os
+#         from ranger.ext.get_executables import get_executables
+#         command = os.environ.get('TERMCMD', os.environ.get('TERM'))
+#         if command not in get_executables():
+#             command = 'x-terminal-emulator'
+#         if command not in get_executables():
+#             command = 'xterm'
+#         self.fm.run(command, flags='f')
 
-# You always need to import ranger.api.commands here to get the Command class:
-from ranger.api.commands import Command
 
+class trash(Command):
+    """:trash [-q]
 
-# Any class that is a subclass of "Command" will be integrated into ranger as a
-# command.  Try typing ":my_edit<ENTER>" in ranger!
-class my_edit(Command):
-    # The so-called doc-string of the class will be visible in the built-in
-    # help that is accessible by typing "?c" inside ranger.
-    """:my_edit <filename>
-
-    A sample command for demonstration purposes that opens a file in an editor.
+    Moves the selected files to the trash bin using Ali Rantakari's 'trash' 
+    program. Optionally takes the -q flag to suppress listing the files 
+    afterwards.
     """
 
-    # The execute method is called when you run this command in ranger.
     def execute(self):
-        # self.arg(1) is the first (space-separated) argument to the function.
-        # This way you can write ":my_edit somefilename<ENTER>".
-        if self.arg(1):
-            # self.rest(1) contains self.arg(1) and everything that follows
-            target_filename = self.rest(1)
+        
+        # Calls the trash program
+        action = ['trash']
+        action.extend(f.path for f in self.fm.thistab.get_selection())
+        self.fm.execute_command(action)
+
+        # TODO: check if the trashing was successful.
+
+        # Echoes the basenames of the trashed files
+        if not self.rest(1) == "-q":
+            names = []
+            names.extend(f.basename for f in self.fm.thistab.get_selection())
+            self.fm.notify("Files moved to the trash: " + ', '.join(map(str, names)))
+
+
+class empty_trash(Command):
+    """:empty_trash [-s] [secure]
+
+    Empties the trash bin using Ali Rantakari's 'trash' program. Add the 
+    optional -s flag for emptying securely, or the string 'secure'.
+    """
+
+    def execute(self):
+        
+        # Calls the trash program
+        action = ['trash']
+        if self.rest(1) == "-s" or self.rest(1) == "secure":
+            action.extend(['-es'])
         else:
-            # self.fm is a ranger.core.filemanager.FileManager object and gives
-            # you access to internals of ranger.
-            # self.fm.thisfile is a ranger.container.file.File object and is a
-            # reference to the currently selected file.
-            target_filename = self.fm.thisfile.path
-
-        # This is a generic function to print text in ranger.
-        self.fm.notify("Let's edit the file " + target_filename + "!")
-
-        # Using bad=True in fm.notify allows you to print error messages:
-        if not os.path.exists(target_filename):
-            self.fm.notify("The given file does not exist!", bad=True)
-            return
-
-        # This executes a function from ranger.core.acitons, a module with a
-        # variety of subroutines that can help you construct commands.
-        # Check out the source, or run "pydoc ranger.core.actions" for a list.
-        self.fm.edit_file(target_filename)
-
-    # The tab method is called when you press tab, and should return a list of
-    # suggestions that the user will tab through.
-    # tabnum is 1 for <TAB> and -1 for <S-TAB> by default
-    def tab(self, tabnum):
-        # This is a generic tab-completion function that iterates through the
-        # content of the current directory.
-        return self._tab_directory_content()
+            action.extend(['-e'])
+        self.fm.execute_command(action)

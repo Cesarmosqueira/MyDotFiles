@@ -8,7 +8,7 @@ set $dfmonitor /home/cmosqueira/.scripts/default-monitor-layout.sh
 set $kbdlayout /home/cmosqueira/.scripts/klayout.sh
 
 exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
-exec_always --no-startup-id autotiling
+exec_always --no-startup-id /home/g/.local/bin/autotiling
 exec_always --no-startup-id flameshot
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id $HOME/.screenlayout/edp1S-dp2P.layout.sh
@@ -16,7 +16,7 @@ exec_always --no-startup-id polybar example
 
 #
 # #---Basic Definitions---# #
-smart_gaps on
+#smart_gaps on
 smart_borders on
 set $inner_gaps 15
 set $outer_gaps 0
@@ -46,7 +46,7 @@ bindsym $mod+Escape              exec --no-startup-id dm-tool switch-to-greeter
 bindsym $mod+Shift+Escape          exec --no-startup-id $hibernate
 
 # bindsym $mod+BackSpace
-bindsym $mod+BackSpace     exec --no-startup-id /home/g/scripts/toggle_layout.sh
+bindsym $mod+BackSpace     exec --no-startup-id /home/g/.scripts/toggle_layout.sh
 
 # space
 bindsym $mod+space                      exec --no-startup-id rofi-menu 
@@ -61,12 +61,12 @@ bindsym $mod+w                      exec --no-startup-id firefox-developer-editi
 bindsym $mod+Shift+w                exec --no-startup-id whatsapp-nativefier-dark
 
 # c
-bindsym $mod+c                      exec --no-startup-id lock
-bindsym $mod+Shift+c                exec --no-startup-id $suspend
+#bindsym $mod+c                      exec --no-startup-id lock
+#bindsym $mod+Shift+c                exec --no-startup-id $suspend
 
 # e
 bindsym $mod+e                      exec --no-startup-id pcmanfm
-bindsym $mod+Shift+e                exec $term -e code-insiders
+#bindsym $mod+Shift+e                exec $term -e code-insiders
 
 # r
 bindsym $mod+r                      exec $term -e ranger
@@ -77,8 +77,8 @@ bindsym $mod+t                      exec $term -e ytop
 bindsym $mod+Shift+t            focus mode_toggle
 
 # y || screenshots
-bindsym $mod+y                      exec --no-startup-id flameshot
-bindsym $mod+Shift+y                  split toggle
+#bindsym $mod+y                      exec --no-startup-id flameshot
+#bindsym $mod+Shift+y                  split toggle
 
 # u
 bindsym $mod+u                  [urgent=latest] focus
@@ -93,7 +93,7 @@ bindsym $mod+o                      exec --no-startup-id $term -e nvim ~/
 # a
 
 # b
-bindsym $mod+Shift+b                exec --no-startup-id /home/g/Downloads/Git/Discord-git/Discord
+bindsym $mod+Shift+b                exec --no-startup-id discord
 
 # s
 bindsym $mod+s                      sticky toggle;
