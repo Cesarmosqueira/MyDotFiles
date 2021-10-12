@@ -18,7 +18,7 @@ exec_always --no-startup-id polybar example
 # #---Basic Definitions---# #
 #smart_gaps on
 smart_borders on
-set $inner_gaps 15
+set $inner_gaps 19
 set $outer_gaps 0
 set $term --no-startup-id alacritty
 set $mod Mod4
@@ -34,7 +34,7 @@ set $hibernate sudo -A systemctl hibernate
 floating_modifier $mod
 
 # #---Gaps---# #
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 1
 gaps inner $inner_gaps
 gaps outer $outer_gaps
 
@@ -87,10 +87,11 @@ bindsym $mod+u                  [urgent=latest] focus
 #bindsym $mod+i                  fullscreen disable; floating enable; resize set 300 200; sticky enable; move position 4792 53
 
 # o
-bindsym $mod+o                      exec --no-startup-id $term -e nvim ~/
+bindsym $mod+o                      exec --no-startup-id $term -e nvim ~/vimwiki/index.wiki
 # bindsym $mod+Shift                    exec --no-startup-id $term -e nvim ~/
 
 # a
+bindsym $mod+a                    exec $term -e asciiquarium
 
 # b
 bindsym $mod+Shift+b                exec --no-startup-id discord
@@ -193,6 +194,7 @@ set $ws10 "10"
 # assign [class="Brave"] $ws1
 # assign [class="Chromium"] $ws2
 for_window [class="Spotify"] move to workspace $ws9
+#for_window [class="^.*] border pixel 0
 
 # Assigning autofloat
 for_window [title=".*Emulator.*"] floating enable
