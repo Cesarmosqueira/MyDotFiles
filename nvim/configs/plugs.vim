@@ -8,7 +8,16 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'beyondmarc/glsl.vim'
 Plug 'morhetz/gruvbox'
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
+Plug 'gosukiwi/vim-atom-dark'
+Plug 'joshdick/onedark.vim'
+Plug 'vimwiki/vimwiki'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+
+
 call plug#end()
 let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
@@ -17,9 +26,6 @@ map <silent> <C-s> :NERDTreeFocus<CR>
 
 map <silent> <F12> :call CocAction('jumpDefinition', 'drop')<CR> 
 
-"airline config
-let g:airline_theme='gruvbox'
-let g:airline#extensions#whitespace#enabled = 0
 
 "cpp enhanced highlight config
 let c_no_curly_error=1

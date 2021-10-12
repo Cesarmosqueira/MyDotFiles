@@ -1,6 +1,21 @@
-"highlight Pmenu ctermbg=8
 "highlight PmenuSel ctermbg=7
 "highlight PmenuThumb ctermbg=15
 "highlight PmenuScroll ctermbg=8
-"highlight Pmenu ctermfg=15
-colorscheme gruvbox
+"highlight Pmenu ctermbg=8 ctermfg=1
+""
+"hi Search ctermbg=LightYellow
+"hi Search ctermfg=Red
+"
+"
+highlight SignColumn guibg=NONE
+highlight LineNr guibg=NONE
+
+
+
+
+"airline config
+let g:airline_theme='onedark'
+let g:airline#extensions#whitespace#enabled = 0
+"main theme
+"colorscheme vim-atom-dark
+"colorscheme onedark

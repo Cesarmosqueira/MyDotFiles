@@ -31,5 +31,6 @@
                 }
             }
         }
-    }
+    },
+	"typescript.preferences.completion.autoImportSuggestions": true
 }
