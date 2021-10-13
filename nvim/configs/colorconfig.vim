@@ -9,6 +9,7 @@
 "
 highlight SignColumn guibg=NONE
 highlight LineNr guibg=NONE
+hi CocFadeOut guibg=#6B3500
 
 
 

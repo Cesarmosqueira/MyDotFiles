@@ -12,7 +12,6 @@ set bg=dark
 set hlsearch
 set signcolumn=yes
 set nu
-set showtabline=2
 set termguicolors
 highlight SignColumn ctermbg=none
 

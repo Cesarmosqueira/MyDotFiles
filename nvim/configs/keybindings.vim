@@ -14,8 +14,10 @@ nnoremap <C-S-Left> <C-W>h
 "Fzf
 nmap <space>p  :Telescope find_files<CR>
 
-"Coc-explorer
-nmap <silent> <C-h> <Cmd>CocCommand explorer<CR>
+"Coc-explorer <Space>e | <Space>f
+"nmap <silent> <C-h> <Cmd>CocCommand explorer<CR>
 
 nmap <silent> <a-s-o> <Cmd>CocCommand tsserver.organizeImports<CR>
+nmap <space>la <Cmd> CocAction <CR>
+nmap <silent> <F3> <Cmd>CocList diagnostics<CR>
 
