@@ -16,6 +16,17 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
+" ES2015 code snippets (Optional)
+Plug 'epilande/vim-es2015-snippets'
+
+" React code snippets
+Plug 'epilande/vim-react-snippets'
+
+" Ultisnips
+Plug 'SirVer/ultisnips'
+
+" Trigger configuration (Optional)
+" let g:UltiSnipsExpandTrigger="<C-l>"
 call plug#end()
 let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
