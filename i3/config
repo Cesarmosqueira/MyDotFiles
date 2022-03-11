@@ -25,7 +25,7 @@ set $dfmonitor /home/cmosqueira/.scripts/default-monitor-layout.sh
 set $kbdlayout /home/cmosqueira/.scripts/klayout.sh
 
 exec_always --no-startup-id picom -experimental-backends --config ~/.config/picom/picom.conf
-exec_always --no-startup-id /home/g/.local/bin/autotiling
+exec_always --no-startup-id autotiling
 exec_always --no-startup-id flameshot
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id $HOME/.screenlayout/edp1S-dp2P.layout.sh
