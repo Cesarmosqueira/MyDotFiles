@@ -1,13 +1,30 @@
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        status_command $HOME/bin/conky-i3bar
+        position top
+        font pango:DejaVuSans, HackNerdFont 11
+        # font -*-proggysquaresz-medium-r-normal-*-11-80-*-*-*-*-iso8859-1
+    workspace_buttons yes
+        colors  {
+        background #0F0F0F
+        statusline #D5D5D5
+        focused_workspace #F5F5FF #7FB256
+        active_workspace #E5E5E5 #5697B2
+        inactive_workspace #E5E5E5 #5697B2
+        urgent_workspace #E5E5E5 #BC9B54
+}
+}
 # bar {
 #         position top
-#             status_command i3status
+# 		status_command i3status
 # }
 
 set $bground /home/cmosqueira/.scripts/bgimage.sh
 set $dfmonitor /home/cmosqueira/.scripts/default-monitor-layout.sh
 set $kbdlayout /home/cmosqueira/.scripts/klayout.sh
 
-exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
+exec_always --no-startup-id picom -experimental-backends --config ~/.config/picom/picom.conf
 exec_always --no-startup-id /home/g/.local/bin/autotiling
 exec_always --no-startup-id flameshot
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
@@ -18,7 +35,7 @@ exec_always --no-startup-id polybar example
 # #---Basic Definitions---# #
 #smart_gaps on
 smart_borders on
-set $inner_gaps 19
+set $inner_gaps 8
 set $outer_gaps 0
 set $term --no-startup-id alacritty
 set $mod Mod4
@@ -35,6 +52,7 @@ floating_modifier $mod
 
 # #---Gaps---# #
 for_window [class="^.*"] border pixel 1
+client.focused #555555 #555555 #ffffff #2e9ef4     #CC0000
 gaps inner $inner_gaps
 gaps outer $outer_gaps
 
@@ -57,7 +75,7 @@ bindsym $mod+q                      [con_id="__focused__" instance="^(?!dropdown
 bindsym $mod+Shift+q                [con_id="__focused__" instance="^(?!dropdown_).*$"] exec --no-startup-id kill -9 `xdotool getwindowfocus getwindowpid`
 
 # w
-bindsym $mod+w                      exec --no-startup-id firefox-developer-edition
+bindsym $mod+w                      exec --no-startup-id google-chrome-stable #firefox-developer-edition #brave
 bindsym $mod+Shift+w                exec --no-startup-id whatsapp-nativefier-dark
 
 # c
@@ -65,7 +83,7 @@ bindsym $mod+Shift+w                exec --no-startup-id whatsapp-nativefier-dar
 #bindsym $mod+Shift+c                exec --no-startup-id $suspend
 
 # e
-bindsym $mod+e                      exec --no-startup-id pcmanfm
+bindsym $mod+e                      exec --no-startup-id nautilus
 #bindsym $mod+Shift+e                exec $term -e code-insiders
 
 # r
@@ -94,7 +112,7 @@ bindsym $mod+o                      exec --no-startup-id $term -e nvim ~/vimwiki
 bindsym $mod+a                    exec $term -e asciiquarium
 
 # b
-bindsym $mod+Shift+b                exec --no-startup-id discord
+bindsym $mod+Shift+b                exec --no-startup-id discord-canary
 
 # s
 bindsym $mod+s                      sticky toggle;

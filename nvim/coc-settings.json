@@ -42,6 +42,8 @@
 		"ts"
 	],
 	"explorer.width": 28,
+	"explorer.openAction.relativePath": true,
+	"explorer.file.showHiddenFiles": true,
 	"explorer.icon.enableNerdfont": true,
 	"explorer.previewAction.onHover": false,
 	"explorer.keyMappings.global": {

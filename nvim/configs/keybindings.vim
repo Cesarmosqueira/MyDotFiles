@@ -21,3 +21,12 @@ nmap <silent> <a-s-o> <Cmd>CocCommand tsserver.organizeImports<CR>
 nmap <space>la <Cmd> CocAction <CR>
 nmap <silent> <F3> <Cmd>CocList diagnostics<CR>
 
+
+" CMake
+let g:cmake_link_compile_commands = 1
+nmap <C-g> <Cmd>CMakeGenerate<cr>
+nmap <C-b> <Cmd>CMakeBuild<cr>
+
+
+
+
