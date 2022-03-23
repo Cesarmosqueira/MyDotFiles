@@ -15,7 +15,8 @@ hi CocFadeOut guibg=#6B3500
 
 
 "airline config
-let g:airline_theme='onedark'
+"let g:airline_theme='onedark'
+let g:airline_theme='jellybeans'
 let g:airline#extensions#whitespace#enabled = 0
 "main theme
 "colorscheme vim-atom-dark
