@@ -1,20 +1,23 @@
+#!/bin/bash
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command $HOME/bin/conky-i3bar
-        position top
-        font pango:DejaVuSans, HackNerdFont 11
-        # font -*-proggysquaresz-medium-r-normal-*-11-80-*-*-*-*-iso8859-1
-    workspace_buttons yes
-        colors  {
-        background #0F0F0F
-        statusline #D5D5D5
-        focused_workspace #F5F5FF #7FB256
-        active_workspace #E5E5E5 #5697B2
-        inactive_workspace #E5E5E5 #5697B2
-        urgent_workspace #E5E5E5 #BC9B54
-}
-}
+# bar {
+#         status_command $HOME/bin/conky-i3bar
+#         position top
+#         font pango:DejaVuSans, HackNerdFont 11
+#         # font -*-proggysquaresz-medium-r-normal-*-11-80-*-*-*-*-iso8859-1
+#     workspace_buttons yes
+#         colors  {
+#         background #141414
+#         statusline #00b0ef
+#         focused_workspace #00b0ef #141414 #00b0ef #ffffff
+#         active_workspace #141414 #141414 #00b0ef #aea79f
+#         inactive_workspace #141414 #141414 #7d7d7d #aea79f
+#         urgent_workspace #ff7066 #141414 #ff7066 #ffffff
+# 		separator #7d7d7d
+# 		}
+# }
 # bar {
 #         position top
 # 		status_command i3status
@@ -27,9 +30,8 @@ set $kbdlayout /home/cmosqueira/.scripts/klayout.sh
 exec_always --no-startup-id picom -experimental-backends --config ~/.config/picom/picom.conf
 exec_always --no-startup-id autotiling
 exec_always --no-startup-id flameshot
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh --cuts
 exec_always --no-startup-id $HOME/.screenlayout/edp1S-dp2P.layout.sh
-exec_always --no-startup-id polybar example
 
 #
 # #---Basic Definitions---# #
@@ -52,7 +54,7 @@ floating_modifier $mod
 
 # #---Gaps---# #
 for_window [class="^.*"] border pixel 1
-client.focused #555555 #555555 #ffffff #2e9ef4     #CC0000
+for_window [window_role="pop-up"] floating enable
 gaps inner $inner_gaps
 gaps outer $outer_gaps
 
@@ -180,7 +182,7 @@ bindsym $mod+Ctrl+minus    exec --no-startup-id /home/nita/.scripts/mod_brightne
 
 
 # m
-bindsym $mod+Shift+m                    exec --no-startup-id youtube-music
+bindsym $mod+Shift+m                    exec --no-startup-id spotify
 
 
 # #---Workspace Bindings---# #
@@ -211,11 +213,18 @@ set $ws10 "10"
 # Assign Workspaces:
 # assign [class="Brave"] $ws1
 # assign [class="Chromium"] $ws2
-for_window [class="Spotify"] move to workspace $ws9
+for_window [class="Spotify"] move to workspace $ws10
+for_window [class="discord"] move to workspace $ws1
 #for_window [class="^.*] border pixel 0
 
 # Assigning autofloat
 for_window [title=".*Emulator.*"] floating enable
+
+# File explorer floating
+for_window [class="Org.gnome.Nautilus"] floating enable
+
+# calendar polybar floating
+for_window [class="Pycalendar.py"] floating enable
 
 # switch to workspace
 bindsym $mod+1      workspace $ws1
@@ -272,11 +281,18 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
 bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 
-# Window borders
-client.focused          #4c7899 #285577 #ffffff #2e9ef4   #abb2bf
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-client.background       #ffffff
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+
+# class                 border  backgr. text    indicator child_border                                                                     
+client.focused_inactive #141414 #141414 #00b0ef #472b2a
+client.unfocused #141414 #141414 #7d7d7d #141414
+client.focused #00b0ef #00b0ef #141414 #ff7066
+
+client.urgent #ff7066 #ff7066 #141414 #ff7066
+
+
 

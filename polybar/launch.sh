@@ -3,7 +3,7 @@
 dir="$HOME/.config/polybar"
 themes=(`ls --hide="launch.sh" $dir`)
 
-Default
+# Default
 launch_bar() {
 	# Terminate already running bar instances
 	killall -q polybar
@@ -13,13 +13,14 @@ launch_bar() {
 
 	# Launch the bar
 	if [[ "$style" == "hack" || "$style" == "cuts" ]]; then
-
-		MONITOR=eDP-1 polybar -q top -c "$dir/$style/config.ini" &
-		# MONITOR=eDP-1 polybar -q bottom -c "$dir/$style/config.ini" &
-
-		MONITOR=DP-1-2 polybar -q top -c "$dir/$style/config.ini" &
-		# MONITOR=DP-1-2 polybar -q bottom -c "$dir/$style/config.ini" &
-
+		
+		if type "xrandr"; then
+		  for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+			MONITOR=$m polybar -q top -c "$dir/cuts/config.ini" &
+		  done
+		else
+		  polybar --reload example &
+		fi
 
 	elif [[ "$style" == "pwidgets" ]]; then
 		bash "$dir"/pwidgets/launch.sh --main

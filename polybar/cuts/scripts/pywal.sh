@@ -52,7 +52,7 @@ if [[ -f "/usr/bin/wal" ]]; then
 		change_color
 	else
 		echo -e "[!] Please enter the path to wallpaper. \n"
-		echo "Usage : ./pywal.sh path/to/image"
+		echo "Usage : ./pywal.sh path/to/wallpaper"
 	fi
 else
 	echo "[!] 'pywal' is not installed."
