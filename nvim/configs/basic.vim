@@ -26,3 +26,5 @@ syntax on
 
 
 verbose set cmdheight=1
+
+autocmd Filetype vimwiki setlocal nonu nornu signcolumn=no tw=79

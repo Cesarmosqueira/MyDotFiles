@@ -21,3 +21,4 @@ let g:airline#extensions#whitespace#enabled = 0
 "main theme
 "colorscheme vim-atom-dark
 "colorscheme onedark
+"colorscheme nord

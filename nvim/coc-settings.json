@@ -50,7 +50,7 @@
 	"explorer.openAction.relativePath": true,
 	"explorer.file.showHiddenFiles": true,
 	"explorer.icon.enableNerdfont": true,
-	"explorer.previewAction.onHover": "labeling",
+	"explorer.previewAction.onHover": false,
 	"explorer.keyMappings.global": {
 		"<cr>": [
 			"expandable?",
@@ -60,6 +60,7 @@
 		"v": "open:vsplit"
 	},
 	"codeLens.enable": true,
+	"java.home": "/usr/lib/jvm/java-11-openjdk",
 	"java.referencesCodeLens.enabled": true,
 	"java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok.jar"
 }
