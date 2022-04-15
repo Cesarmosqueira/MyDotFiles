@@ -1,3 +1,5 @@
 //@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
 //@theme "/usr/share/rofi/themes/docu.rasi"
-@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
+//@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
+// @theme "/usr/share/rofi/themes/polytheme/styles.rasi"
+@theme "/usr/share/rofi/themes/Monokai.rasi"
