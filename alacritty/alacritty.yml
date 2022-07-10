@@ -45,32 +45,30 @@ key_bindings:
 colors:
   # Default colors
   primary:
-    background: '0x0d1117'
-    foreground: '0xb3b1ad'
+    # hard contrast: background = '#1d2021'
+    background: '#282828'
+    # soft contrast: background = '#32302f'
+    foreground: '#ebdbb2'
 
   # Normal colors
   normal:
-    black: '0x484f58'
-    red: '0xff7b72'
-    green: '0x3fb950'
-    yellow: '0xd29922'
-    blue: '0x58a6ff'
-    magenta: '0xbc8cff'
-    cyan: '0x39c5cf'
-    white: '0xb3b1ad'
+    black: '#282828'
+    red: '#cc241d'
+    green: '#98971a'
+    yellow: '#d79921'
+    blue: '#458588'
+    magenta: '#b16286'
+    cyan: '#689d6a'
+    white: '#a89984'
 
   # Bright colors
   bright:
-    black: '0x6e7681'
-    red: '0xffa198'
-    green: '0x56d364'
-    yellow: '0xe3b341'
-    blue: '0x79c0ff'
-    magenta: '0xd2a8ff'
-    cyan: '0x39c5cf'
-    white: '0xb3b1ad'
-
-  indexed_colors:
-    - { index: 16, color: '0xd18616' }
-    - { index: 17, color: '0xffa198' }
-theme: github_dark_default
+    black: '#928374'
+    red: '#fb4934'
+    green: '#b8bb26'
+    yellow: '#fabd2f'
+    blue: '#83a598'
+    magenta: '#d3869b'
+    cyan: '#8ec07c'
+    white: '#ebdbb2'
+theme: Gruvbox-Dark

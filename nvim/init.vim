@@ -5,5 +5,3 @@ source $HOME/.config/nvim/configs/keybindings.vim
 source $HOME/.config/nvim/configs/colorconfig.vim
 
 luafile $HOME/.config/nvim/lua_files/treesitter-setup.lua
-luafile $HOME/.config/nvim/lua_files/github_theme_config.lua
-

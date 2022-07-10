@@ -36,7 +36,7 @@ exec mailspring
 # exec spotify
 exec noisetorch
 
-exec_always --no-startup-id picom -experimental-backends --config ~/.config/picom/picom.conf
+# exec_always --no-startup-id picom -experimental-backends --config ~/.config/picom/picom.conf
 exec_always --no-startup-id autotiling
 exec_always --no-startup-id flameshot
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh --cuts
@@ -46,8 +46,8 @@ exec_always --no-startup-id $HOME/.screenlayout/edp1S-dp2P.layout.sh
 # #---Basic Definitions---# #
 #smart_gaps on
 smart_borders on
-set $inner_gaps 8
-set $outer_gaps 0
+set $inner_gaps 5
+set $outer_gaps 5
 set $term --no-startup-id alacritty
 set $mod Mod4
 set $alt Mod1
@@ -87,7 +87,7 @@ bindsym $mod+Shift+q                [con_id="__focused__" instance="^(?!dropdown
 
 # w
 bindsym $mod+w                      exec --no-startup-id brave #google-chrome-stable #firefox-developer-edition 
-bindsym $mod+Shift+w                exec --no-startup-id whatsapp-nativefier-dark
+bindsym $mod+Shift+w                exec --no-startup-id whatsapp-nativefier
 
 # c
 #bindsym $mod+c                      exec --no-startup-id lock
@@ -123,7 +123,7 @@ bindsym $mod+o                      exec --no-startup-id $term -e nvim ~/vimwiki
 bindsym $mod+a                    exec $term -e asciiquarium
 
 # b
-bindsym $mod+Shift+b                exec --no-startup-id discord-canary
+bindsym $mod+Shift+b                exec --no-startup-id discord
 
 # s
 bindsym $mod+s                      sticky toggle;
@@ -176,7 +176,7 @@ bindsym $mod+p                      exec --no-startup-id picom -b
 bindsym $mod+Shift+p                exec --no-startup-id killall picom
 
 # v
-bindsym $mod+v                    exec $term -e ncpamixer
+bindsym $mod+v                    exec --no-startup-id pavucontrol
 
 # b
 bindsym $mod+b                      exec --no-startup-id feh --bg-fill --randomize ~/Pictures/wallpapers/*
@@ -237,8 +237,13 @@ for_window [title=".*Emulator.*"] floating enable
 # File explorer floating
 for_window [class="Org.gnome.Nautilus"] floating enable
 
+# Pavu floating like a shit in the toilet yems yems fimbi fimbi
+for_window [class="Pavucontrol"] floating enable
+
 # calendar polybar floating
 for_window [class="Pycalendar.py"] floating enable
+
+for_window [title="Simulador"] floating enable
 
 # switch to workspace
 bindsym $mod+1      workspace $ws1
@@ -295,8 +300,8 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
 bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioPlay exec playerctl --player=spotify play-pause
+bindsym XF86AudioPause exec playerctl --player=spotify play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 

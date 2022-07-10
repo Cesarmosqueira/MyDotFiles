@@ -59,8 +59,8 @@
 		],
 		"v": "open:vsplit"
 	},
-	"codeLens.enable": true,
-	"java.home": "/usr/lib/jvm/java-11-openjdk",
+	"codeLens.enable": false,
+	"java.home": "/usr/lib/jvm/java-18-openjdk",
 	"java.referencesCodeLens.enabled": true,
 	"java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok.jar"
 }

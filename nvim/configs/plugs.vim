@@ -24,6 +24,7 @@ Plug 'cdelledonne/vim-cmake'
 Plug 'epilande/vim-es2015-snippets'
 " React code snippets
 Plug 'epilande/vim-react-snippets'
+Plug 'neoclide/coc-snippets'
 " Ultisnips
 Plug 'SirVer/ultisnips'
 call plug#end()
