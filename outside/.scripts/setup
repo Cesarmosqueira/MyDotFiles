@@ -4,6 +4,7 @@ xset -dpms
 xset s noblank 
 #faster terminal
 xset r rate 270 50
+pacmd set-default-sink 1
 
 exec ~/.screenlayout/twomonitors.sh
 exec nitrogen --restore

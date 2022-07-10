@@ -107,13 +107,20 @@ source $ZSH/oh-my-zsh.sh
 # ~/.bashrc
 #
 
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
+export JAVA_HOME="/usr/lib/jvm/java-18-openjdk"
+
+
 bindkey -v
 
 alias explorer='nautilus'
 
 # export applications=/home/g/Downloads/Applications
-export UNI=/home/g/Documents/2022-1
-export LIN=/home/g/Documents/links_baby
+export UNI=/home/g/Docs/2022-1
+export LIN=/home/g/Docs/links_baby
 
 export term=alacritty
 export browser=firefox-developer-edition
@@ -144,3 +151,7 @@ alias v='ncpamixer'
 alias searchfor='grep -rnw . -e'
 alias vimrc='cd ~/.config/nvim'
 alias tree='lsd --tree'
+[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
+
+
+
