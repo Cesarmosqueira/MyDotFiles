@@ -22,6 +22,6 @@ let g:airline#extensions#whitespace#enabled = 0
 "colorscheme vim-atom-dark
 "colorscheme onedark
 "colorscheme nord
-colorscheme gruvbox
 "
 " luafile $HOME/.config/nvim/lua_files/github_theme_config.lua
+colorscheme dracula

@@ -24,6 +24,7 @@ set nocompatible
 filetype plugin on
 syntax on
 
+set clipboard+=unnamedplus
 
 verbose set cmdheight=1
 

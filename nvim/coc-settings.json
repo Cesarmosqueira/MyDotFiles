@@ -36,6 +36,7 @@
 			}
 		}
 	},
+	"diagnostic.checkCurrentLine": true,
 	"coc.preferences.formatOnSaveFiletypes": [
 		"css",
 		"markdown",
@@ -60,7 +61,7 @@
 		"v": "open:vsplit"
 	},
 	"codeLens.enable": false,
-	"java.home": "/usr/lib/jvm/java-18-openjdk",
+	"java.home": "/usr/lib/jvm/java-18-jdk",
 	"java.referencesCodeLens.enabled": true,
 	"java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok.jar"
 }

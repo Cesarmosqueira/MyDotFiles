@@ -19,7 +19,9 @@ nmap <space>p  :Telescope find_files<CR>
 
 nmap <silent> <a-s-o> <Cmd>CocCommand tsserver.organizeImports<CR>
 nmap <silent> <a-s-e> <Cmd>CocCommand java.clean.workspace<CR>
-nmap <space>la <Cmd> CocAction <CR>
+"nmap <space>la <Cmd> CocAction <CR>
+nmap <space>la <Cmd> call CocAction('codeAction', '') <CR>
+
 nmap <silent> <F3> <Cmd>CocList diagnostics<CR>
 
 
