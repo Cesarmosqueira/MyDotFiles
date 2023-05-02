@@ -30,4 +30,4 @@ verbose set cmdheight=1
 
 autocmd Filetype typescript,html,css setlocal ts=2 shiftwidth=2 expandtab
 autocmd Filetype vimwiki setlocal nonu nornu signcolumn=no tw=79 ts=2 shiftwidth=2 expandtab
-
+autocmd Filetype vimwiki setlocal mouse=a

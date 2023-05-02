@@ -7,9 +7,6 @@
 "hi Search ctermfg=Red
 "
 "
-highlight SignColumn guibg=NONE
-highlight LineNr guibg=NONE
-hi CocFadeOut guibg=#6B3500
 
 
 
@@ -24,4 +21,9 @@ let g:airline#extensions#whitespace#enabled = 0
 "colorscheme nord
 "
 " luafile $HOME/.config/nvim/lua_files/github_theme_config.lua
-colorscheme dracula
+let g:gruvbox_contrast_dark='hard'
+colorscheme gruvbox
+
+highlight SignColumn guibg=NONE
+highlight LineNr guibg=NONE
+hi CocFadeOut guibg=#6B3500
