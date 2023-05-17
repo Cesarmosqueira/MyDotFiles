@@ -1,0 +1,7 @@
+#!/bin/bash
+
+exec nitrogen --restore
+
+xkbset r rate 210 25
+
+exec $HOME/scripts/twomonitors.sh

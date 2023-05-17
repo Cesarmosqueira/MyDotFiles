@@ -1,0 +1,294 @@
+exec_always --no-startup-id picom --config $HOME/.config/picom/picom.conf
+exec_always --no-startup-id $HOME/scripts/setup
+
+exec_always autotiling
+
+bar {
+    status_command i3status
+    position top
+}
+#
+# #---Basic Definitions---# #
+#smart_gaps on
+smart_borders on
+set $inner_gaps 5
+set $outer_gaps 5
+set $term --no-startup-id alacritty
+set $mod Mod4
+set $alt Mod1
+set $shutdown sudo -A shutdown -h now
+set $reboot sudo -A reboot
+set $lock i3lock
+set $suspend sudo systemctl suspend
+set $hibernate sudo -A systemctl hibernate
+set $BROWSER google-chrome-sable
+
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# #---Gaps---# #
+for_window [class="^.*"] border pixel 1
+for_window [window_role="pop-up"] floating enable
+gaps inner $inner_gaps
+gaps outer $outer_gaps
+
+
+# #---Basic Bindings---# #
+bindsym $mod+Return         exec $term
+bindsym $mod+Shift+Return           exec $term --working-directory  $(xcwd)
+
+bindsym $mod+Escape              exec --no-startup-id dm-tool switch-to-greeter
+bindsym $mod+Shift+Escape          exec --no-startup-id $hibernate
+
+# bindsym $mod+BackSpace
+bindsym $mod+BackSpace     exec --no-startup-id /home/g/.scripts/toggle_layout.sh
+
+
+# #---Letter Key Bindings---# #
+bindsym $mod+q                      [con_id="__focused__" instance="^(?!dropdown_).*$"] kill
+bindsym $mod+Shift+q                [con_id="__focused__" instance="^(?!dropdown_).*$"] exec --no-startup-id kill -9 `xdotool getwindowfocus getwindowpid`
+
+# w
+bindsym $mod+w                      exec --no-startup-id brave
+bindsym $mod+Shift+w                exec --no-startup-id whatsapp-nativefier
+
+# c
+#bindsym $mod+c                      exec --no-startup-id lock
+#bindsym $mod+Shift+c                exec --no-startup-id $suspend
+
+# e
+bindsym $mod+e                      exec --no-startup-id pcmanfm
+#bindsym $mod+Shift+e                exec $term -e code-insiders
+
+# r
+bindsym $mod+r                      exec dmenu_run
+bindsym $mod+Shift+r                exec --no-startup-id winresize
+
+# t
+bindsym $mod+t                      exec $term -e ytop
+bindsym $mod+Shift+t            focus mode_toggle
+
+# y || screenshots
+#bindsym $mod+y                      exec --no-startup-id flameshot
+#bindsym $mod+Shift+y                  split toggle
+
+# u
+bindsym $mod+u                  [urgent=latest] focus
+
+# i
+#bindsym $mod+i                  fullscreen disable; floating enable; resize set 300 200; sticky enable; move position 4792 53
+
+# o
+bindsym $mod+o                      exec --no-startup-id $term -e nvim ~/vimwiki/index.wiki
+# bindsym $mod+Shift                    exec --no-startup-id $term -e nvim ~/
+
+# a
+bindsym $mod+a                    exec $term -e asciiquarium
+
+# b
+bindsym $mod+Shift+b                exec --no-startup-id discord
+
+# s
+bindsym $mod+s                      sticky toggle;
+bindsym $mod+Shift+s                        exec --no-startup-id flameshot gui
+
+# d
+bindsym $mod+d                  exec --no-startup-id ulauncher
+
+# f
+bindsym $mod+f                      fullscreen toggle
+bindsym $mod+Shift+f              floating toggle
+
+# g
+bindsym $mod+g                    gaps inner current set $inner_gaps; gaps outer current set $outer_gaps
+bindsym $mod+Shift+g                gaps inner current set 0; gaps outer current set 0
+
+
+# h
+bindsym $mod+h                      focus left
+bindsym $mod+Shift+h            resize shrink width 5 px or 5 ppt
+bindsym $mod+Ctrl+h               move workspace to output left
+
+# j
+bindsym $mod+j                      focus down
+bindsym $mod+Shift+j                resize shrink height 5 px or 5 ppt
+bindsym $mod+Ctrl+j               move workspace to output down
+
+# k
+bindsym $mod+k                      focus up
+bindsym $mod+Shift+k                resize grow height 5 px or 5 ppt
+bindsym $mod+Ctrl+k               move workspace to output up
+
+# l
+bindsym $mod+l                      focus right
+bindsym $mod+Shift+l                resize grow width 5 px or 5 ppt
+bindsym $mod+Ctrl+l               move workspace to output right
+
+bindsym $mod+semicolon              exec --no-startup-id skippy-xd
+
+# z
+bindsym $mod+z                      exec --no-startup-id $term -e nvim ~/.zshrc
+
+# x
+bindsym $mod+x                      exec --no-startup-id $reboot
+bindsym $mod+Shift+x                exec --no-startup-id $shutdown
+
+# p
+bindsym $mod+p                      exec --no-startup-id picom -b
+bindsym $mod+Shift+p                exec --no-startup-id killall picom
+
+# v
+bindsym $mod+v                    exec --no-startup-id pavucontrol
+
+# b
+bindsym $mod+b                      exec --no-startup-id feh --bg-fill --randomize ~/Pictures/wallpapers/*
+
+# n
+bindsym $mod+n          exec --no-startup-id /home/nita/.scripts/night_brightness
+bindsym $mod+Shift+n    exec --no-startup-id /home/nita/.scripts/normal_brightness
+
+# plus minus
+bindsym $mod+Ctrl+plus    exec --no-startup-id /home/nita/.scripts/mod_brightness 0.06
+bindsym $mod+Ctrl+minus    exec --no-startup-id /home/nita/.scripts/mod_brightness -0.06
+
+
+# m
+bindsym $mod+Shift+m                    exec --no-startup-id spotify-launcher
+
+
+# #---Workspace Bindings---# #
+# bindsym $mod+Tab                  exec --no-startup-id rofi-menu-windows
+bindsym $mod+Tab                  workspace next
+bindsym $mod+Shift+Tab            workspace prev
+bindsym $mod+apostrophe           split horizontal ;; exec $term
+bindsym $mod+slash                split vertical ;; exec $term
+bindsym $mod+Shift+slash          kill
+bindsym $mod+backslash            workspace back_and_forth
+bindsym $mod+Shift+Ctrl+Right           workspace next
+bindsym $mod+Shift+Ctrl+Left            workspace prev
+
+# #--- Preferences ---# #
+focus_follows_mouse no
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Assign ws10 and 1 to left monitor
+workspace $ws1 output $monitor_laptop
+workspace $ws10 output $monitor_laptop
+
+# Assign Workspaces:
+# assign [class="Brave"] $ws1
+# assign [class="Chromium"] $ws2
+for_window [class="Spotify"] move to workspace $ws10
+for_window [class="discord"] move to workspace $ws1
+for_window [class="Mailspring"] move to workspace $ws8
+#for_window [class="^.*] border pixel 0
+
+# Assigning autofloat
+for_window [title=".*Emulator.*"] floating enable
+
+# File explorer floating
+for_window [class="pcmanfm"] floating enable
+
+# Pavu floating like a shit in the toilet yems yems fimbi fimbi
+for_window [class="Pavucontrol"] floating enable
+
+# calendar polybar floating
+for_window [class="Pycalendar.py"] floating enable
+
+for_window [title="Simulador"] floating enable
+
+
+# https://github.com/ValveSoftware/steam-for-linux/issues/1040
+for_window [class="^Steam$" title="^Friends$"] floating enable
+for_window [class="^Steam$" title="Steam - News"] floating enable
+for_window [class="^Steam$" title=".* - Chat"] floating enable
+for_window [class="^Steam$" title="^Settings$"] floating enable
+for_window [class="^Steam$" title=".* - event started"] floating enable
+for_window [class="^Steam$" title=".* CD key"] floating enable
+for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
+for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
+for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
+for_window [title="^Steam Keyboard$"] floating enable
+for_window [class="^Steam$"] move to workspace $ws9
+
+
+# switch to workspace
+bindsym $mod+1      workspace $ws1
+bindsym $mod+2      workspace $ws2
+bindsym $mod+3      workspace $ws3
+bindsym $mod+4      workspace $ws4
+bindsym $mod+5      workspace $ws5
+bindsym $mod+6      workspace $ws6
+bindsym $mod+7      workspace $ws7
+bindsym $mod+8      workspace $ws8
+bindsym $mod+9      workspace $ws9
+bindsym $mod+0      workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1    move container to workspace $ws1
+bindsym $mod+Shift+2    move container to workspace $ws2
+bindsym $mod+Shift+3    move container to workspace $ws3
+bindsym $mod+Shift+4    move container to workspace $ws4
+bindsym $mod+Shift+5    move container to workspace $ws5
+bindsym $mod+Shift+6    move container to workspace $ws6
+bindsym $mod+Shift+7    move container to workspace $ws7
+bindsym $mod+Shift+8    move container to workspace $ws8
+bindsym $mod+Shift+9    move container to workspace $ws9
+bindsym $mod+Shift+0    move container to workspace $ws10
+
+for_window [window_role="GtkFileChooserDialog"] resize set 800 600
+for_window [window_role="GtkFileChooserDialog"] move position center
+
+
+# #---Function Buttons---# #
+bindsym $mod+F1             restart
+bindsym $mod+F2             exec --no-startup-id screenkey -s small --scr 1 -p fixed -g 600x100+2573+1330 --opacity .9 --font-color white
+bindsym $mod+F3				exec --no-startup-id killall screenkey
+bindsym $mod+F12            exec $term -e nmtui
+
+# #---Arrow Keys---# # 
+bindsym $mod+Left           focus left
+bindsym $mod+Ctrl+Left      move workspace to output right
+bindsym $mod+Down           focus down
+bindsym $mod+Ctrl+Down      move workspace to output up
+bindsym $mod+Up             focus up
+bindsym $mod+Ctrl+Up        move workspace to output down
+bindsym $mod+Right          focus right
+bindsym $mod+Ctrl+Right     move workspace to output left
+
+##resizing
+bindsym $mod+Shift+Left     move left
+bindsym $mod+Shift+Up       move up
+bindsym $mod+Shift+Down     move down
+bindsym $mod+Shift+Right    move right
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
+bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
+
+bindsym XF86AudioPlay exec playerctl --player=spotify play-pause
+bindsym XF86AudioPause exec playerctl --player=spotify play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+
+# class                 border  backgr. text    indicator child_border                                                                     
+client.focused_inactive #141414 #141414 #00b0ef #472b2a
+client.unfocused #141414 #141414 #7d7d7d #141414
+client.focused #00b0ef #00b0ef #141414 #ff7066
+
+client.urgent #ff7066 #ff7066 #141414 #ff7066
+
+
