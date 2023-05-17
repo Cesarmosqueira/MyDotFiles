@@ -1,12 +1,32 @@
 exec_always --no-startup-id picom --config $HOME/.config/picom/picom.conf
+exec_always --no-startup-id $HOME/scripts/twomonitors.sh
 exec_always --no-startup-id $HOME/scripts/setup
-
+exec_always --no-startup-id dunst -conf $HOME/.config/dunst/dunstrc
+exec_always nitrogen --restore
 exec_always autotiling
 
+
+
 bar {
+
+    i3bar_command i3bar --transparency
+    font pango:Rubik 10
     status_command i3status
     position top
+
+    colors {
+        background #18191ae6
+            statusline #e1d7c3
+            separator #666666AA
+
+            focused_workspace   #4c7899AA #1e5022 #ffffff33
+            active_workspace    #333333 #5f676a #ffffff33
+            inactive_workspace  #333333 #222222 #88888833
+            urgent_workspace    #2f343a #900000 #ffffff33
+            binding_mode        #2f343a #900000 #ffffff33
+    }
 }
+
 #
 # #---Basic Definitions---# #
 #smart_gaps on
