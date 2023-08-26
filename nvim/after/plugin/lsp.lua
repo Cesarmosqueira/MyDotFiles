@@ -3,14 +3,15 @@ require("mason-lspconfig").setup({
     ensure_installed = {
         "lua_ls",
         "gopls",
-        "pyright"
+        "pyright",
+        "clangd"
     }
 })
 
 local lsp = require("lsp-zero")
 local cmp = require('cmp')
 local lspconfig = require('lspconfig')
-
+local util = require('lspconfig/util')
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 
@@ -66,10 +67,23 @@ end
 
 lsp.on_attach(on_attach)
 
+local root_files = {
+  'pyproject.toml',
+  'setup.py',
+  'setup.cfg',
+  'requirements.txt',
+  'Pipfile',
+  'pyrightconfig.json',
+  '.git',
+}
+
 lspconfig.pyright.setup {
     on_attach = on_attach,
     settings = {
-        pyright = { autoImportCompletion = true, },
+        pyright = {
+            autoImportCompletion = true,
+            projectRootPatterns = {"pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json"},
+        },
         python = {
             analysis = {
                 autoSearchPaths = true,
@@ -77,8 +91,40 @@ lspconfig.pyright.setup {
                 useLibraryCodeForTypes = true,
                 typeCheckingMode = 'off'
             }
-        }
-    }
+        },
+    },
+}
+local lsp_flags = {
+    -- This is the default in Nvim 0.7+
+    debounce_text_changes = 150,
+}
+
+lspconfig.clangd.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    filetypes = { "h", "c", "cpp", "cc", "objc", "objcpp"},
+    flags = lsp_flags,
+    cmd = {"clangd", "--background-index"},
+    single_file_support = true,
+    root_dir = lspconfig.util.root_pattern(
+          '.clangd',
+          '.clang-tidy',
+          '.clang-format',
+          'compile_commands.json',
+          'compile_flags.txt',
+          'configure.ac',
+          '.git'
+        )
+})
+
+lspconfig.intelephense.setup{
+    cmd = { "intelephense", "--stdio" },
+    filetypes = { "php" },
+    root_dir = function (pattern)
+        local cwd  = vim.loop.cwd();
+        local root = util.root_pattern("composer.json", ".git")(pattern);
+        return util.path.is_descendant(cwd, root) and cwd or root;
+    end,
 }
 
 lspconfig.lua_ls.setup {

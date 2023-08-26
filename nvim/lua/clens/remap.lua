@@ -11,3 +11,17 @@ vim.api.nvim_set_keymap('n', '<C-S-Left>', '<C-w>h', {silent=true})
 
 
 vim.api.nvim_set_keymap("n", "<Space>e", ':NvimTreeToggle', {silent=true})
+
+-- Copy selected text to system clipboard
+vim.api.nvim_set_keymap('v', '<C-s>', '"+y', { noremap = true })
+
+
+-- function ToggleShowTabline()
+--   if vim.o.showtabline == 0 then
+--     vim.o.showtabline = 2
+--   else
+--     vim.o.showtabline = 0
+--   end
+-- end
+-- vim.api.nvim_set_keymap('n', '<F2>', ':lua ToggleShowTabline()<CR>', { noremap = true, silent = true })
+

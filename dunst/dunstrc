@@ -189,3 +189,9 @@
     timeout = 20
     icon = /opt/anime/icon-critical.svg
 
+[layout]                                                                         
+    appname = layout
+    history_ignore = yes                                                         
+    foreground = "#ebdbb2"                                                       
+    set_stack_tag = "volume"
+

@@ -1,8 +1,8 @@
 local opts = { noremap = true, silent = true }
 
 
-vim.keymap.set("n", "<f4>", "<cmd>PickColor<cr>", opts)
-vim.keymap.set("i", "<f4>", "<cmd>PickColorInsert<cr>", opts)
+vim.keymap.set("n", "<f5>", "<cmd>PickColor<cr>", opts)
+vim.keymap.set("i", "<f5>", "<cmd>PickColorInsert<cr>", opts)
 
 -- vim.keymap.set("n", "your_keymap", "<cmd>ConvertHEXandRGB<cr>", opts)
 -- vim.keymap.set("n", "your_keymap", "<cmd>ConvertHEXandHSL<cr>", opts)

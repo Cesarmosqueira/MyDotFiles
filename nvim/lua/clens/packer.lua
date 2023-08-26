@@ -7,15 +7,25 @@ return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
+
+    -- THEMES --
+    use { "catppuccin/nvim", as = "catppuccin" }
+    use { "rebelot/kanagawa.nvim" }
+    -- END THEMES --
+
     use {
 	    'nvim-telescope/telescope.nvim', tag = '0.1.1',
 	    -- or                            , branch = '0.1.x',
 	    requires = { {'nvim-lua/plenary.nvim'} }
     }
 
-    use { "catppuccin/nvim", as = "catppuccin" }
 
     use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+
+    use {
+        requires = { "nvim-treesitter/nvim-treesitter" },
+        "Badhi/nvim-treesitter-cpp-tools",
+    }
 
     use {'hrsh7th/nvim-cmp'}
     use {'hrsh7th/cmp-nvim-lsp'}
@@ -48,10 +58,6 @@ return require('packer').startup(function(use)
             'nvim-tree/nvim-web-devicons', -- optional
         }
     }
-    use {'romgrk/barbar.nvim', requires = {
-        'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
-        'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
-    }}
 
     use {
         'nvim-lualine/lualine.nvim',
@@ -62,5 +68,14 @@ return require('packer').startup(function(use)
     use ({'andweeb/presence.nvim'})
 
     use ({'lspcontainers/lspcontainers.nvim'})
+
+    use {
+        'TimUntersberger/neogit',
+        requires = {
+          'nvim-lua/plenary.nvim',
+          'sindrets/diffview.nvim',
+          'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+        }
+    }
 
 end)

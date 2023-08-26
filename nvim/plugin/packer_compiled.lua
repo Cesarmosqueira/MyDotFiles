@@ -79,11 +79,6 @@ _G.packer_plugins = {
     path = "/home/g/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
-  ["barbar.nvim"] = {
-    loaded = true,
-    path = "/home/g/.local/share/nvim/site/pack/packer/start/barbar.nvim",
-    url = "https://github.com/romgrk/barbar.nvim"
-  },
   catppuccin = {
     loaded = true,
     path = "/home/g/.local/share/nvim/site/pack/packer/start/catppuccin",
@@ -99,10 +94,20 @@ _G.packer_plugins = {
     path = "/home/g/.local/share/nvim/site/pack/packer/start/color-picker.nvim",
     url = "https://github.com/ziontee113/color-picker.nvim"
   },
+  ["diffview.nvim"] = {
+    loaded = true,
+    path = "/home/g/.local/share/nvim/site/pack/packer/start/diffview.nvim",
+    url = "https://github.com/sindrets/diffview.nvim"
+  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/home/g/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
+  },
+  ["kanagawa.nvim"] = {
+    loaded = true,
+    path = "/home/g/.local/share/nvim/site/pack/packer/start/kanagawa.nvim",
+    url = "https://github.com/rebelot/kanagawa.nvim"
   },
   ["lsp-zero.nvim"] = {
     loaded = true,
@@ -129,6 +134,11 @@ _G.packer_plugins = {
     path = "/home/g/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  neogit = {
+    loaded = true,
+    path = "/home/g/.local/share/nvim/site/pack/packer/start/neogit",
+    url = "https://github.com/TimUntersberger/neogit"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/g/.local/share/nvim/site/pack/packer/start/nvim-cmp",
@@ -148,6 +158,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/g/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
+  ["nvim-treesitter-cpp-tools"] = {
+    loaded = true,
+    path = "/home/g/.local/share/nvim/site/pack/packer/start/nvim-treesitter-cpp-tools",
+    url = "https://github.com/Badhi/nvim-treesitter-cpp-tools"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
