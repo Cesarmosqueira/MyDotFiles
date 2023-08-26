@@ -1,7 +1,10 @@
 #!/bin/bash
 
-exec nitrogen --restore
 
 xkbset r rate 210 25
+setxkbmap -rules evdev -model evdev -layout us -variant altgr-intl &
+
+exec nitrogen --restore
+
 
 exec $HOME/scripts/twomonitors.sh

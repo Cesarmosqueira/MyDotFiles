@@ -120,6 +120,10 @@ source ${ZIM_HOME}/init.zsh
 #
 export PATH=/home/g/.local/bin:$PATH
 export PATH=/home/g/go/bin:$PATH
+export PATH=$PATH:/opt/cuda/bin
+
+export QT_QPA_PLATFORM_PLUGIN_PATH=/usr/lib/qt/plugins
+
 
 zmodload -F zsh/terminfo +p:terminfo
 # Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
@@ -160,4 +164,7 @@ alias searchfor='grep -rnw . -e'
 alias vimrc='cd ~/.config/nvim'
 alias tree='lsd --tree'
 
+export PYTHONPATH=${PYTHONPATH}:$HOME/pynaoqi/lib/python2.7/site-packages
+export QT_DEBUG_PLUGINS=1
 
+[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
