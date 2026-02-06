@@ -1,3 +1,4 @@
+-- ~/.config/nvim/lua/plugins.lua
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
 -- Only required if you have packer configured as `opt`
@@ -7,51 +8,56 @@ return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
-
     -- THEMES --
     use { "catppuccin/nvim", as = "catppuccin" }
     use { "rebelot/kanagawa.nvim" }
     -- END THEMES --
 
+    -- Telescope
     use {
-	    'nvim-telescope/telescope.nvim', tag = '0.1.1',
-	    -- or                            , branch = '0.1.x',
-	    requires = { {'nvim-lua/plenary.nvim'} }
+        'nvim-telescope/telescope.nvim',
+        requires = { {'nvim-lua/plenary.nvim'} }
     }
 
-
-    use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
-
+    -- Treesitter
     use {
-        requires = { "nvim-treesitter/nvim-treesitter" },
-        "Badhi/nvim-treesitter-cpp-tools",
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
     }
 
-    use {'hrsh7th/nvim-cmp'}
-    use {'hrsh7th/cmp-nvim-lsp'}
-    use {'L3MON4D3/LuaSnip'}
-
     use {
-	    'VonHeikemen/lsp-zero.nvim',
-	    branch = 'v2.x',
-	    requires = {
-	        -- LSP Support
-		    {'neovim/nvim-lspconfig'},             -- Required
+        'Badhi/nvim-treesitter-cpp-tools',
+        requires = { "nvim-treesitter/nvim-treesitter" }
+    }
+
+    -- Autocompletion
+    use 'hrsh7th/nvim-cmp'
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'L3MON4D3/LuaSnip'
+
+    -- LSP Zero
+    use {
+        'VonHeikemen/lsp-zero.nvim',
+        branch = 'v2.x',
+        requires = {
+            -- LSP Support
+            {'neovim/nvim-lspconfig'},             -- Required
             {                                      -- Optional
-		        'williamboman/mason.nvim',
-		        run = function()
+                'williamboman/mason.nvim',
+                run = function()
                     pcall(vim.cmd, 'MasonUpdate')
-		        end,
-	        },
+                end,
+            },
             {'williamboman/mason-lspconfig.nvim'}, -- Optional
 
-	        -- Autocompletion
-	        {'hrsh7th/nvim-cmp'},     -- Required
-	        {'hrsh7th/cmp-nvim-lsp'}, -- Required
-	        {'L3MON4D3/LuaSnip'},     -- Required
+            -- Autocompletion
+            {'hrsh7th/nvim-cmp'},     -- Required
+            {'hrsh7th/cmp-nvim-lsp'}, -- Required
+            {'L3MON4D3/LuaSnip'},     -- Required
         }
     }
 
+    -- File explorer
     use {
         'nvim-tree/nvim-tree.lua',
         requires = {
@@ -59,23 +65,41 @@ return require('packer').startup(function(use)
         }
     }
 
+    -- Statusline
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     }
 
-    use ({"ziontee113/color-picker.nvim" })
-    use ({'andweeb/presence.nvim'})
+    -- Other plugins
+    use 'ziontee113/color-picker.nvim'
+    use 'andweeb/presence.nvim'
+    use 'lspcontainers/lspcontainers.nvim'
 
-    use ({'lspcontainers/lspcontainers.nvim'})
-
+    -- Git integration
     use {
         'TimUntersberger/neogit',
         requires = {
-          'nvim-lua/plenary.nvim',
-          'sindrets/diffview.nvim',
-          'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+            'nvim-lua/plenary.nvim',
+            'sindrets/diffview.nvim',
+            'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
         }
     }
 
+    -- OPTIONAL plugins loaded directly due to Packer lazy loading bug
+    use 'nvim-tree/nvim-web-devicons' -- OPTIONAL: for file icons
+    use 'lewis6991/gitsigns.nvim' -- OPTIONAL: for git status
+    use 'romgrk/barbar.nvim'
+
+    use({
+    'projekt0n/github-nvim-theme',
+    config = function()
+        require('github-theme').setup({
+        -- ...
+        })
+
+        vim.cmd('colorscheme github_dark')
+    end
+    })
 end)
+

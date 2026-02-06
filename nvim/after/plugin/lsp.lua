@@ -1,44 +1,53 @@
+-- ~/.config/nvim/after/plugin/lsp.lua
+
+-- Mason setup
 require("mason").setup()
 require("mason-lspconfig").setup({
     ensure_installed = {
         "lua_ls",
         "gopls",
         "pyright",
-        "clangd"
+        "clangd",
+        "ts_ls",
+        "eslint",
+        "rust_analyzer"
     }
 })
 
-local lsp = require("lsp-zero")
+-- LSP Zero setup
+local lsp = require("lsp-zero").preset({
+    name = 'recommended',
+    set_lsp_keymaps = false,
+    manage_nvim_cmp = true,
+    suggest_lsp_servers = true,
+})
+
+-- CMP setup
 local cmp = require('cmp')
-local lspconfig = require('lspconfig')
-local util = require('lspconfig/util')
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local cmp_select = {behavior = cmp.SelectBehavior.Select}
+local cmp_mappings = lsp.defaults.cmp_mappings({
+    ['<S-Up>'] = cmp.mapping.scroll_docs(-4),
+    ['<S-Down>'] = cmp.mapping.scroll_docs(4),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+})
 
-
-
-
-local cmp_setup = {
-    mapping = cmp.mapping.preset.insert({
-        ['<S-Up>'] = cmp.mapping.scroll_docs(-4),
-        ['<S-Down>'] = cmp.mapping.scroll_docs(4),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    }),
+cmp.setup({
+    mapping = cmp_mappings,
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'vsnip' }, -- For vsnip users.
-    }, {
         { name = 'buffer' },
     })
-}
+})
 
-
-lsp.preset("recommended")
+-- LSP settings
 lsp.ensure_installed({
-    'tsserver',
+    'ts_ls',
     'eslint',
     'rust_analyzer',
     'gopls',
 })
+
+-- LSP preferences
 lsp.set_preferences({
     suggest_lsp_servers = true,
     sign_icons = {
@@ -49,64 +58,52 @@ lsp.set_preferences({
     },
 })
 
-local on_attach = function(_, bufnr)
+-- Common on_attach function for LSP servers
+local on_attach = function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
-
     vim.keymap.set("n", "<F12>", function() vim.lsp.buf.definition() end, opts)
-
-    vim.keymap.set("n", "K", function() vim.lsp.bduf.hover() end, opts)
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, silent = true })
+    vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
     vim.keymap.set("n", "<Space>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
     vim.keymap.set("n", "<Space>vd", function() vim.diagnostic.open_float() end, opts)
-    vim.keymap.set("n", "]g", function() vim.diagnostic.goto_next() end, opts)
-    vim.keymap.set("n", "[g", function() vim.diagnostic.goto_prev() end, opts)
+
+    vim.keymap.set("n", "]g", vim.diagnostic.goto_next, { buffer = bufnr, silent = true })
+    vim.keymap.set("n", "[g", vim.diagnostic.goto_prev, { buffer = bufnr, silent = true })
+
     vim.keymap.set("n", "<Space>la", function() vim.lsp.buf.code_action() end, opts)
     vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
     vim.keymap.set("n", "<Space>rn", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
 end
 
-lsp.on_attach(on_attach)
+-- Server-specific setups
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-local root_files = {
-  'pyproject.toml',
-  'setup.py',
-  'setup.cfg',
-  'requirements.txt',
-  'Pipfile',
-  'pyrightconfig.json',
-  '.git',
-}
-
-lspconfig.pyright.setup {
+lsp.configure('pyright', {
     on_attach = on_attach,
+    capabilities = capabilities,
     settings = {
         pyright = {
             autoImportCompletion = true,
-            projectRootPatterns = {"pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json"},
         },
         python = {
             analysis = {
                 autoSearchPaths = true,
                 diagnosticMode = 'openFilesOnly',
                 useLibraryCodeForTypes = true,
-                typeCheckingMode = 'off'
+                typeCheckingMode = 'off',
             }
-        },
-    },
-}
-local lsp_flags = {
-    -- This is the default in Nvim 0.7+
-    debounce_text_changes = 150,
-}
+        }
+    }
+})
 
-lspconfig.clangd.setup({
+lsp.configure('clangd', {
     capabilities = capabilities,
     on_attach = on_attach,
     filetypes = { "h", "c", "cpp", "cc", "objc", "objcpp"},
-    flags = lsp_flags,
     cmd = {"clangd", "--background-index"},
     single_file_support = true,
-    root_dir = lspconfig.util.root_pattern(
+    root_dir = require('lspconfig/util').root_pattern(
           '.clangd',
           '.clang-tidy',
           '.clang-format',
@@ -114,43 +111,44 @@ lspconfig.clangd.setup({
           'compile_flags.txt',
           'configure.ac',
           '.git'
-        )
+        ),
 })
 
-lspconfig.intelephense.setup{
+lsp.configure('intelephense', {
     cmd = { "intelephense", "--stdio" },
     filetypes = { "php" },
     root_dir = function (pattern)
         local cwd  = vim.loop.cwd();
-        local root = util.root_pattern("composer.json", ".git")(pattern);
-        return util.path.is_descendant(cwd, root) and cwd or root;
+        local root = require('lspconfig/util').root_pattern("composer.json", ".git")(pattern);
+        return require('lspconfig/util').path.is_descendant(cwd, root) and cwd or root;
     end,
-}
+})
 
-lspconfig.lua_ls.setup {
-  settings = {
-    Lua = {
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
-      },
+lsp.configure('lua_ls', {
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = {'vim'},
+            },
+        },
     },
-  },
-}
+})
 
-lspconfig.tsserver.setup {
-}
+lsp.configure('ts_ls', {
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
 
-lspconfig.dockerls.setup {
-  before_init = function(params)
-    params.processId = vim.NIL
-  end,
-  cmd = {"docker-langserver", "--stdio"},
-  filetypes = { "dockerfile" },
-  root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
-}
+lsp.configure('dockerls', {
+    before_init = function(params)
+        params.processId = vim.NIL
+    end,
+    cmd = {"docker-langserver", "--stdio"},
+    filetypes = { "dockerfile" },
+    root_dir = require('lspconfig/util').root_pattern(".git", vim.fn.getcwd()),
+})
 
-lspconfig.gopls.setup {
+lsp.configure('gopls', {
     capabilities = capabilities,
     on_attach = on_attach,
     settings = {
@@ -200,9 +198,9 @@ lspconfig.gopls.setup {
             vulncheck = "Imports",
         },
     },
-}
+})
 
-
-cmp.setup(cmp_setup)
-
+-- Apply the setup
+lsp.on_attach(on_attach)
 lsp.setup()
+
