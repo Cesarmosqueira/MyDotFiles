@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 local opts = { noremap = true, silent = true }
 
 

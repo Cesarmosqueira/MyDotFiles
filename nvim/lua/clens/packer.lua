@@ -91,6 +91,9 @@ return require('packer').startup(function(use)
     use 'lewis6991/gitsigns.nvim' -- OPTIONAL: for git status
     use 'romgrk/barbar.nvim'
 
+    -- GitHub Copilot
+    use 'github/copilot.vim'
+
     use({
     'projekt0n/github-nvim-theme',
     config = function()
@@ -101,5 +104,8 @@ return require('packer').startup(function(use)
         vim.cmd('colorscheme github_dark')
     end
     })
+
+    -- Markdown preview in Neovim
+    use 'ellisonleao/glow.nvim'
 end)
 

@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 -- require("catppuccin").setup({
 --     flavour = "mocha", -- latte, frappe, macchiato, mocha
 --     background = { -- :h background

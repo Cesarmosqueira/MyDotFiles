@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 -- Lua
 local actions = require("diffview.actions")
 

@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 -- Default options:
 require('kanagawa').setup({
     compile = false,             -- enable compiling the colorscheme

@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 -- ~/.config/nvim/after/plugin/lsp.lua
 
 -- Mason setup
@@ -203,4 +205,3 @@ lsp.configure('gopls', {
 -- Apply the setup
 lsp.on_attach(on_attach)
 lsp.setup()
-

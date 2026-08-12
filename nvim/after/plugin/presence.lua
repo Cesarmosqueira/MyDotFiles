@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 -- The setup config table shows all available config options with their default values:
 require("presence").setup({
     -- General options

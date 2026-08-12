@@ -27,3 +27,9 @@ vim.opt.scrolloff = 8
 vim.opt.updatetime = 50
 
 vim.o.hlsearch = true
+
+-- Theme (skip under VSCode — it owns the colorscheme, and the theme plugin
+-- isn't loaded there since packer is gated off)
+if not vim.g.vscode then
+  vim.cmd('colorscheme github_dark')
+end
